@@ -1,4 +1,6 @@
 const { environment } = require('../../environment')
+const path = require('path')
+
 module.exports = {
   type: 'postgres',
   host: environment.server.database.host,
@@ -8,10 +10,12 @@ module.exports = {
   database: environment.server.database.database,
   synchronize: false,
   logging: false,
-  entities: ['./src/**/models/*.ts'],
-  migrations: ['./src/database/migrations/*.ts'],
+  entities: [path.resolve(__dirname, 'src', '**', 'Models', '*.ts')],
+  migrations: [
+    path.resolve(__dirname, 'src', 'Database', 'Migrations', '*.ts')
+  ],
   cli: {
-    entitiesDir: './src/**/models',
-    migrationsDir: './src/database/migrations'
+    entitiesDir: path.resolve(__dirname, 'src', '**', 'Models'),
+    migrationsDir: path.resolve(__dirname, 'src', 'Database', 'Migrations')
   }
 }

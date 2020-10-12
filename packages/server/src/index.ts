@@ -1,5 +1,5 @@
 import 'reflect-metadata'
-import './database/connect'
+import './Database/connect'
 import express from 'express'
 import { environment as env } from '../../../environment'
 import { router } from './routes'
