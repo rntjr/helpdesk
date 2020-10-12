@@ -10,6 +10,11 @@
       "packages/*"
     ]
   },
+  "scripts": {
+    "commit": "git add . && git commit",
+    "server:dev": "yarn workspace @helpdesk/server dev",
+    "typeorm": "yarn workspace @helpdesk/server typeorm"
+  },
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged",
@@ -31,13 +36,23 @@
       "path": "cz-conventional-changelog"
     }
   },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "pg": "^8.4.1",
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.2.28"
+  },
   "devDependencies": {
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^11.0.0",
+    "@types/cors": "^2.8.7",
+    "@types/express": "^4.17.8",
     "@typescript-eslint/eslint-plugin": "^4.3.0",
     "@typescript-eslint/parser": "^4.3.0",
     "commitizen": "^4.2.1",
     "cz-conventional-changelog": "^3.3.0",
+    "dotenv": "^8.2.0",
     "eslint": "^7.10.0",
     "eslint-config-prettier": "^6.12.0",
     "eslint-config-standard": "^14.1.1",
