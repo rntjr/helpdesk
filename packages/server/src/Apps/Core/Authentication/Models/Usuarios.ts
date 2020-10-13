@@ -1,5 +1,13 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm'
+import {
+  BeforeInsert,
+  BeforeUpdate,
+  Column,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn
+} from 'typeorm'
 import { UsuariosGrupoPermissao } from './UsuariosGrupoPermissao'
+import bcrypt from 'bcrypt'
 
 @Entity({ name: 'Usuarios', schema: 'Core' })
 export class Usuarios {
@@ -15,7 +23,7 @@ export class Usuarios {
   @Column({ unique: true })
   usuario: string
 
-  @Column()
+  @Column({ nullable: false })
   senha: string
 
   @OneToMany(
@@ -23,4 +31,10 @@ export class Usuarios {
     (usuariosGrupoPermissao) => usuariosGrupoPermissao.usuario
   )
   usuarioGrupoPermissao: UsuariosGrupoPermissao[]
+
+  @BeforeInsert()
+  @BeforeUpdate()
+  hashedPassword(): void {
+    this.senha = bcrypt.hashSync(this.senha, 10)
+  }
 }

@@ -8,12 +8,12 @@ export class Pessoa {
   @PrimaryGeneratedColumn()
   id: number
 
-  @OneToOne((type) => Fisica, (idFisica) => idFisica.id)
-  idFisica: Fisica
+  @OneToOne((type) => Fisica, (fisica) => fisica.id)
+  fisica: Fisica
 
-  @OneToOne((type) => Juridica, (idJuridica) => idJuridica.id)
-  idJuridica: Juridica
+  @OneToOne((type) => Juridica, (juridica) => juridica.id)
+  juridica: Juridica
 
-  @ManyToOne((type) => Endereco, (idEndereco) => idEndereco.id)
-  idEndereco: Endereco
+  @ManyToOne((type) => Endereco, (endereco) => endereco.id, { nullable: false })
+  endereco: Endereco
 }

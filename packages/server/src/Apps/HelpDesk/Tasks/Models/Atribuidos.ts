@@ -7,9 +7,9 @@ export class Atribuidos {
   @PrimaryGeneratedColumn()
   id: number
 
-  @ManyToOne((type) => Tarefas, (tarefas) => tarefas.id)
+  @ManyToOne((type) => Tarefas, (tarefas) => tarefas.id, { nullable: false })
   tarefas: Tarefas
 
-  @ManyToOne((type) => Usuarios, (usuario) => usuario.id)
+  @ManyToOne((type) => Usuarios, (usuario) => usuario.id, { nullable: false })
   usuario: Usuarios
 }

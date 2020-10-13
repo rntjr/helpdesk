@@ -7,24 +7,26 @@ export class AcessoGrupoPermissao {
   @PrimaryGeneratedColumn()
   id: number
 
-  @ManyToOne((type) => Telas, (telas) => telas.id)
+  @ManyToOne((type) => Telas, (telas) => telas.id, { nullable: false })
   telas: Telas
 
-  @ManyToOne((type) => GrupoPermissao, (grupoPermissao) => grupoPermissao.id)
+  @ManyToOne((type) => GrupoPermissao, (grupoPermissao) => grupoPermissao.id, {
+    nullable: false
+  })
   grupoPermissao: GrupoPermissao
 
-  @Column()
+  @Column({ default: false })
   isMenu: boolean
 
-  @Column()
+  @Column({ default: false })
   isAcesso: boolean
 
-  @Column()
+  @Column({ default: false })
   isSalvar: boolean
 
-  @Column()
+  @Column({ default: false })
   isEditar: boolean
 
-  @Column()
+  @Column({ default: false })
   isDeletar: boolean
 }

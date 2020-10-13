@@ -8,7 +8,7 @@ export class Juridica {
   @Column()
   nome: string
 
-  @Column()
+  @Column({ unique: true })
   cnpj: string
 
   @Column()

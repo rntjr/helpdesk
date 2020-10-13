@@ -1,13 +1,17 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm'
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm'
+import { ColunaQuadro } from './ColunaQuadro'
 
 @Entity()
 export class Quadros {
   @PrimaryGeneratedColumn()
   id: number
 
-  @Column()
+  @Column({ nullable: false })
   nome: string
 
   @Column()
   descricao: string
+
+  @OneToMany((type) => ColunaQuadro, (colunas) => colunas.quadros)
+  colunas: ColunaQuadro[]
 }

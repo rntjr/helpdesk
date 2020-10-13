@@ -5,10 +5,10 @@ import path from 'path'
 dotenv.config({ path: path.join(__dirname, '.env') })
 
 export interface Environment {
-  web?: {
-    port?: number
-  };
   server: {
+    token: {
+      secret: string
+    },
     port: number,
     database: {
       type: string,
@@ -23,6 +23,11 @@ export interface Environment {
 
 export const environment: Environment = {
   server: {
+    token: {
+      secret:
+        process.env.SERVER_TOKEN_SECRET ||
+        '5Z90aH02c5s1x8ET8AeM5dThhAryZ5g8Qf0L9w9sjjQeb9Xe0a'
+    },
     port: Number(process.env.SERVER_PORT) || 3000,
     database: {
       type: process.env.SERVER_DATABASE_TYPE || 'postgres',

@@ -5,18 +5,18 @@ export class Endereco {
   @PrimaryGeneratedColumn()
   id: number
 
-  @Column()
+  @Column({ unique: true })
   cep: string
 
-  @Column()
+  @Column({ nullable: false })
   rua: string
 
-  @Column()
+  @Column({ nullable: false })
   bairro: string
 
-  @Column()
+  @Column({ nullable: false })
   cidade: string
 
-  @Column()
+  @Column({ nullable: false })
   estado: string
 }

@@ -1,17 +1,17 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm'
-import { UsuariosGrupoPermissao } from './UsuariosGrupoPermissao'
+import { AcessoGrupoPermissao } from './AcessoGrupoPermissao'
 
 @Entity({ name: 'GrupoPermissao', schema: 'Core' })
 export class GrupoPermissao {
   @PrimaryGeneratedColumn()
   id: number
 
-  @Column()
+  @Column({ nullable: false })
   nome: string
 
   @OneToMany(
-    (type) => UsuariosGrupoPermissao,
-    (usuariosGrupoPermissao) => usuariosGrupoPermissao.permissao
+    (type) => AcessoGrupoPermissao,
+    (acessoGrupoPermissao) => acessoGrupoPermissao.grupoPermissao
   )
-  usuarioGrupoPermissao: UsuariosGrupoPermissao[]
+  acessoGrupoPermissao: AcessoGrupoPermissao[]
 }

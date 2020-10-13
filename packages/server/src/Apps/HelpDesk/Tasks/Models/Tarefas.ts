@@ -8,7 +8,9 @@ import {
 import { Usuarios } from '../../../Core/Authentication/Models/Usuarios'
 import { Etiquetas } from '../../Models/Etiqueta'
 import { Atribuidos } from './Atribuidos'
+import { Checklist } from './Checklist'
 import { Revisores } from './Revisores'
+import { Status } from './Status'
 
 @Entity({ name: 'Tarefas', schema: 'HelpDesk' })
 export class Tarefas {
@@ -21,30 +23,39 @@ export class Tarefas {
   @Column({ default: Date.now() })
   abertura: Date
 
-  @Column()
+  /*
+   * Campo responsavel por identificar se a tarefa é um Chamado, Mudança (Pull Request) ou Problema(Issue).
+   */
+  @Column({ nullable: false })
   classe: number
 
-  @Column()
+  /*
+   * Campo responsavel por identificar se a tarefa é uma requisição ou incidente.
+   */
+  @Column({ nullable: false })
   tipo: number
 
-  @Column()
-  estado: number
+  @ManyToOne((type) => Status, (status) => status.id)
+  status: Status
 
-  @Column()
+  @Column({ nullable: false })
   prioridade: number
 
-  @Column()
+  @Column({ nullable: false })
   titulo: string
 
-  @Column()
+  @Column({ nullable: false })
   descricao: string
 
-  // @OneToMany((type) => Atribuidos, (atribuidos) => atribuidos.idTarefas)
-  // atribuidos: Atribuidos[]
+  @OneToMany((type) => Atribuidos, (atribuidos) => atribuidos.tarefas)
+  atribuidos: Atribuidos[]
 
   @OneToMany((type) => Revisores, (revisores) => revisores.tarefas)
   revisores: Revisores[]
 
   @OneToMany((type) => Etiquetas, (etiquetas) => etiquetas.tarefas)
   etiquetas: Etiquetas[]
+
+  @OneToMany((type) => Checklist, (checkList) => checkList.tarefas)
+  checkList: Checklist[]
 }

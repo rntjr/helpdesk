@@ -5,15 +5,15 @@ export class Fisica {
   @PrimaryGeneratedColumn()
   id: number
 
-  @Column()
+  @Column({ nullable: false })
   nome: string
 
-  @Column()
+  @Column({ unique: true })
   cpf: string
 
-  @Column()
+  @Column({ nullable: false })
   aniversario: Date
 
-  @OneToMany((type) => Fisica, (idMae) => idMae.id)
+  @OneToMany((type) => Fisica, (idMae) => idMae.id, { nullable: false })
   idMae: Fisica
 }
