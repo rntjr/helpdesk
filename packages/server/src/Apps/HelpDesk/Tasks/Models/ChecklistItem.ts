@@ -6,7 +6,7 @@ export class ChecklistItem {
   @PrimaryGeneratedColumn()
   id: number
 
-  @ManyToOne((type) => Checklist, (idChecklist) => idChecklist.id, {
+  @ManyToOne((type) => Checklist, (checkList) => checkList.id, {
     nullable: false
   })
   checkList: Checklist

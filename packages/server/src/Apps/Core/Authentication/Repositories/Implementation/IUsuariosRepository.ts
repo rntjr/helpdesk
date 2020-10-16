@@ -2,7 +2,12 @@ import { ICRUDRepository } from '../../../Repositories/ICRUDRepository'
 import { Usuarios } from '../../Models/Usuarios'
 import { getRepository, DeleteResult, UpdateResult } from 'typeorm'
 
-export class IUsuariosRepository implements ICRUDRepository {
+class IUsuariosRepository implements ICRUDRepository {
+  async findByUsuario(usuario: string): Promise<Usuarios> {
+    const repo = getRepository(Usuarios)
+    return await repo.findOne({ where: { usuario } })
+  }
+
   async create<Usuarios>(data: Usuarios): Promise<Usuarios> {
     const repo = getRepository(Usuarios)
     return await repo.save(data)
@@ -18,3 +23,5 @@ export class IUsuariosRepository implements ICRUDRepository {
     return await repo.delete(id)
   }
 }
+
+export default new IUsuariosRepository()

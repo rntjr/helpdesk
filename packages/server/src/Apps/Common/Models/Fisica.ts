@@ -15,5 +15,5 @@ export class Fisica {
   aniversario: Date
 
   @OneToMany((type) => Fisica, (idMae) => idMae.id, { nullable: false })
-  idMae: Fisica
+  mae: Fisica
 }
