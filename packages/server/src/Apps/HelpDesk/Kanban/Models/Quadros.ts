@@ -1,7 +1,7 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm'
 import { ColunaQuadro } from './ColunaQuadro'
 
-@Entity()
+@Entity({ schema: 'HelpDesk', name: 'Quadros' })
 export class Quadros {
   @PrimaryGeneratedColumn()
   id: number

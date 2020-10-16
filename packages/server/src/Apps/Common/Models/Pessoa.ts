@@ -1,19 +1,36 @@
-import { Entity, ManyToOne, OneToOne, PrimaryGeneratedColumn } from 'typeorm'
+import {
+  BeforeInsert,
+  BeforeUpdate,
+  Column,
+  Entity,
+  ManyToOne,
+  PrimaryGeneratedColumn
+} from 'typeorm'
 import { Endereco } from './Endereco'
-import { Fisica } from './Fisica'
-import { Juridica } from './Juridica'
 
 @Entity({ name: 'Pessoa', schema: 'Common' })
 export class Pessoa {
   @PrimaryGeneratedColumn()
   id: number
 
-  @OneToOne((type) => Fisica, (fisica) => fisica.id)
-  fisica: Fisica
+  @Column()
+  nome: string
 
-  @OneToOne((type) => Juridica, (juridica) => juridica.id)
-  juridica: Juridica
+  @Column()
+  fantasia: string
+
+  @Column({ unique: true })
+  cgc: string
+
+  @Column({ nullable: false })
+  aniversario: Date
 
   @ManyToOne((type) => Endereco, (endereco) => endereco.id, { nullable: false })
   endereco: Endereco
+
+  @BeforeInsert()
+  @BeforeUpdate()
+  tratarCGC(): void {
+    this.cgc = this.cgc.toString().trim()
+  }
 }

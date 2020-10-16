@@ -5,10 +5,10 @@ import { Usuarios } from '../Models/Usuarios'
 import usuarioRepository from '../Repositories/Implementation/IUsuariosRepository'
 
 export class AuthenticationService {
-  constructor(private response: Response, private error: ErrorRequestHandler) {}
+  constructor(private response: Response) {}
   public async createToken(usuarios: Usuarios): Promise<Response> {
     if (!usuarios) {
-      return this.response.status(401).send({ err: this.error })
+      return this.response.status(401).send({ err: 'Dados não enviados' })
     }
     const data = await usuarioRepository.findByUsuario(usuarios.usuario)
     if (!data) {

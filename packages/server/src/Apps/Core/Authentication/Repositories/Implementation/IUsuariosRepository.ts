@@ -9,8 +9,9 @@ class IUsuariosRepository implements ICRUDRepository {
   }
 
   async create<Usuarios>(data: Usuarios): Promise<Usuarios> {
+    console.log(`data: ${data}`)
     const repo = getRepository(Usuarios)
-    return await repo.save(data)
+    return await repo.save(data, { data })
   }
 
   async update<Usuarios>(id: number, data: Usuarios): Promise<UpdateResult> {

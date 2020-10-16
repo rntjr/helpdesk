@@ -8,7 +8,7 @@ import {
 import { Cartao } from './Cartao'
 import { Quadros } from './Quadros'
 
-@Entity()
+@Entity({ schema: 'HelpDesk', name: 'ColunaQuadro' })
 export class ColunaQuadro {
   @PrimaryGeneratedColumn()
   id: number

@@ -2,7 +2,7 @@ import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm'
 import { Tarefas } from '../../Tasks/Models/Tarefas'
 import { ColunaQuadro } from './ColunaQuadro'
 
-@Entity()
+@Entity({ schema: 'HelpDesk', name: 'Cartao' })
 export class Cartao {
   @PrimaryGeneratedColumn()
   id: number

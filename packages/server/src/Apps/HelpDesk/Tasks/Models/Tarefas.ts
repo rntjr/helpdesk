@@ -1,5 +1,6 @@
 import {
   Column,
+  CreateDateColumn,
   Entity,
   ManyToOne,
   OneToMany,
@@ -20,7 +21,8 @@ export class Tarefas {
   @ManyToOne((type) => Usuarios, (autor) => autor.id)
   autor: Usuarios
 
-  @Column({ default: Date.now() })
+  @CreateDateColumn()
+  @Column()
   abertura: Date
 
   /*

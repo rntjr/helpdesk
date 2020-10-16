@@ -4,11 +4,7 @@ import { AuthenticationService } from '../Services/AuthenticationService'
 import validatePassword from '../Services/ValidatePasswordService'
 
 class AuthenticationController {
-  async execute(
-    error: ErrorRequestHandler,
-    request: Request,
-    response: Response
-  ): Promise<Response> {
+  async execute(request: Request, response: Response): Promise<Response> {
     const acessar: AcessarDTO = request.body
     if (!acessar) {
       return response.status(403).send({ message: 'Sem dados na requisição!' })
@@ -18,7 +14,7 @@ class AuthenticationController {
         .status(403)
         .send({ message: 'Usuario ou senha inválidos!' })
     }
-    const auth = new AuthenticationService(response, error)
+    const auth = new AuthenticationService(response)
     return await auth.createToken(acessar)
   }
 }

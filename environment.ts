@@ -11,6 +11,10 @@ export interface Environment {
     },
     port: number,
     database: {
+      users: {
+        migration: string,
+        root: string
+      },
       type: string,
       host: string,
       port: number,
@@ -30,6 +34,10 @@ export const environment: Environment = {
     },
     port: Number(process.env.SERVER_PORT) || 3000,
     database: {
+      users: {
+        migration: process.env.SERVER_DATABASE_USERS_MIGRATION || 'postgres',
+        root: process.env.SERVER_DATABASE_USERS_ROOT || 'postgres'
+      },
       type: process.env.SERVER_DATABASE_TYPE || 'postgres',
       host: process.env.SERVER_DATABASE_HOST || 'localhost',
       port: Number(process.env.SERVER_DATABASE_PORT) || 5432,

@@ -1,9 +1,12 @@
-import { Router } from 'express'
+import express, { Request, Response } from 'express'
 import publicRoute from './Public'
 
-const router = Router()
+const app = express.Router()
 
-router.use('/public', publicRoute)
+app.get('/hello', (request: Request, response: Response) => {
+  return response.send({ message: 'Hello World' })
+})
+app.use('/public', publicRoute)
 // router.use('/private')
 
-export { router }
+export default app
