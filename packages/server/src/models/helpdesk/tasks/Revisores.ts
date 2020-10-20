@@ -7,9 +7,9 @@ export class Revisores {
   @PrimaryGeneratedColumn()
   id: number
 
-  @ManyToOne((type) => Tarefas, (tarefas) => tarefas.id, { nullable: false })
+  @ManyToOne((type) => Tarefas, (tarefas) => tarefas.id)
   tarefas: Tarefas
 
-  @ManyToOne((type) => Usuarios, (usuario) => usuario.id, { nullable: false })
+  @ManyToOne((type) => Usuarios, (usuario) => usuario.id)
   usuario: Usuarios
 }

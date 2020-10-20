@@ -8,11 +8,9 @@ export class UsuariosGrupoPermissao {
   id: number
 
   // Associations
-  @ManyToOne((type) => Usuarios, (usuario) => usuario.id, { nullable: false })
+  @ManyToOne((type) => Usuarios, (usuario) => usuario.id)
   usuario: Usuarios
 
-  @ManyToOne((type) => GrupoPermissao, (permissao) => permissao.id, {
-    nullable: false
-  })
+  @ManyToOne((type) => GrupoPermissao, (permissao) => permissao.id)
   permissao: GrupoPermissao
 }

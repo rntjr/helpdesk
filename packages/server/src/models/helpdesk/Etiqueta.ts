@@ -1,5 +1,5 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm'
-import { Tarefas } from '../Tasks/Models/Tarefas'
+import { Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm'
+import { Tarefas } from './tasks/Tarefas'
 
 @Entity({ name: 'Etiquetas', schema: 'HelpDesk' })
 export class Etiquetas {

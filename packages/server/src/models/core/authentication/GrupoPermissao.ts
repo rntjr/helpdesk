@@ -6,7 +6,7 @@ export class GrupoPermissao {
   @PrimaryGeneratedColumn()
   id: number
 
-  @Column({ nullable: false })
+  @Column()
   nome: string
 
   @OneToMany(

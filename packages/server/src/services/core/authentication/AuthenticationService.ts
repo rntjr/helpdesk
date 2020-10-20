@@ -1,25 +1,28 @@
 import { Response } from 'express'
-import jwt from 'jsonwebtoken'
-import { environment as env } from '../../../../../../environment'
-import { Usuarios } from '../../../models/core/authentication/Usuarios'
-import usuarioRepository from '../../../repositories/implementations/core/authentication/UsuariosRepository'
+import { IUsuarios } from '../../../models/core/authentication/Usuarios'
+import { IUsuariosRepository } from '../../../repositories/core/authentication/IUsuariosRepository'
+import { TokenService } from './TokenService'
 
-export class AuthenticationService {
-  constructor(private response: Response) {}
-  public async createToken(usuarios: Usuarios): Promise<Response> {
-    if (!usuarios.usuario) {
-      return this.response.status(401).send({ err: 'Dados não enviados' })
+export interface IAuthenticationService {
+  execute(usuarios: IUsuarios): Promise<Response>
+}
+
+export class AuthenticationService implements IAuthenticationService {
+  constructor(
+    private response: Response,
+    private usuarioRepository: IUsuariosRepository,
+    private tokenService: TokenService
+  ) {}
+
+  async execute(usuarios: IUsuarios): Promise<Response> {
+    const usuario = await this.usuarioRepository.findByUsuario(usuarios.usuario)
+    if (!usuario) {
+      return this.response
+        .status(404)
+        .send({ message: 'Usuario não encontrado' })
     }
-    const data = await usuarioRepository.findByUsuario(usuarios.usuario)
-    if (!data) {
-      return this.response.status(401).send({ err: 'Usuario não encontrado!' })
-    }
-    delete data.senha
-    const token = await jwt.sign({ data }, env.server.token.secret)
-    return this.response.status(401).send({ token })
+    delete usuario.senha
+    const token = await this.tokenService.createToken({ usuario: usuario })
+    return this.response.status(200).send({ token })
   }
-
-  /* public async validateToken(token: string): Promise<boolean> {
-    return null
-  } */
 }

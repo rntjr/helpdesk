@@ -1,5 +1,5 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm'
-import { Tarefas } from '../Tasks/Tarefas'
+import { Tarefas } from '../tasks/Tarefas'
 import { ColunaQuadro } from './ColunaQuadro'
 
 @Entity({ schema: 'HelpDesk', name: 'Cartao' })
@@ -16,9 +16,9 @@ export class Cartao {
   @Column()
   sequencia: number
 
-  @Column({ nullable: false })
+  @Column()
   titulo: string
 
-  @Column()
+  @Column({ nullable: true })
   descricao: string
 }

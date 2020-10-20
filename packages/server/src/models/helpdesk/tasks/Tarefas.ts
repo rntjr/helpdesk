@@ -28,25 +28,25 @@ export class Tarefas {
   /*
    * Campo responsavel por identificar se a tarefa é um Chamado, Mudança (Pull Request) ou Problema(Issue).
    */
-  @Column({ nullable: false })
+  @Column()
   classe: number
 
   /*
    * Campo responsavel por identificar se a tarefa é uma requisição ou incidente.
    */
-  @Column({ nullable: false })
+  @Column()
   tipo: number
 
   @ManyToOne((type) => Status, (status) => status.id)
   status: Status
 
-  @Column({ nullable: false })
+  @Column({ nullable: true })
   prioridade: number
 
-  @Column({ nullable: false })
+  @Column()
   titulo: string
 
-  @Column({ nullable: false })
+  @Column({ nullable: true })
   descricao: string
 
   @OneToMany((type) => Atribuidos, (atribuidos) => atribuidos.tarefas)

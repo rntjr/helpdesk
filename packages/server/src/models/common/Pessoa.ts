@@ -16,16 +16,16 @@ export class Pessoa {
   @Column()
   nome: string
 
-  @Column()
+  @Column({ nullable: true })
   fantasia: string
 
   @Column({ unique: true })
   cgc: string
 
-  @Column({ nullable: false })
+  @Column({ nullable: true })
   aniversario: Date
 
-  @ManyToOne((type) => Endereco, (endereco) => endereco.id, { nullable: false })
+  @ManyToOne((type) => Endereco, (endereco) => endereco.id)
   endereco: Endereco
 
   @BeforeInsert()

@@ -7,12 +7,10 @@ export class AcessoGrupoPermissao {
   @PrimaryGeneratedColumn()
   id: number
 
-  @ManyToOne((type) => Telas, (telas) => telas.id, { nullable: false })
+  @ManyToOne((type) => Telas, (telas) => telas.id)
   telas: Telas
 
-  @ManyToOne((type) => GrupoPermissao, (grupoPermissao) => grupoPermissao.id, {
-    nullable: false
-  })
+  @ManyToOne((type) => GrupoPermissao, (grupoPermissao) => grupoPermissao.id)
   grupoPermissao: GrupoPermissao
 
   @Column({ default: false })

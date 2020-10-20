@@ -6,15 +6,13 @@ export class ChecklistItem {
   @PrimaryGeneratedColumn()
   id: number
 
-  @ManyToOne((type) => Checklist, (checkList) => checkList.id, {
-    nullable: false
-  })
+  @ManyToOne((type) => Checklist, (checkList) => checkList.id)
   checkList: Checklist
 
-  @Column({ nullable: false })
+  @Column()
   nome: string
 
-  @Column()
+  @Column({ nullable: true })
   descricao: string
 
   @Column({ default: false })

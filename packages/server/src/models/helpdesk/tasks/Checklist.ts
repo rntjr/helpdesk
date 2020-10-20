@@ -13,13 +13,13 @@ export class Checklist {
   @PrimaryGeneratedColumn()
   id: number
 
-  @ManyToOne((type) => Tarefas, (tarefas) => tarefas.id, { nullable: false })
+  @ManyToOne((type) => Tarefas, (tarefas) => tarefas.id)
   tarefas: Tarefas
 
-  @Column({ nullable: false })
+  @Column()
   titulo: string
 
-  @Column()
+  @Column({ nullable: true })
   descricao: string
 
   @OneToMany(

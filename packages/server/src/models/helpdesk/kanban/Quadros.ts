@@ -6,10 +6,10 @@ export class Quadros {
   @PrimaryGeneratedColumn()
   id: number
 
-  @Column({ nullable: false })
+  @Column()
   nome: string
 
-  @Column()
+  @Column({ nullable: true })
   descricao: string
 
   @OneToMany((type) => ColunaQuadro, (colunas) => colunas.quadros)

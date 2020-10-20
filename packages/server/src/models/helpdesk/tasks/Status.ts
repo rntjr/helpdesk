@@ -5,12 +5,12 @@ export class Status {
   @PrimaryGeneratedColumn()
   id: number
 
-  @Column({ nullable: false })
+  @Column()
   nome: string
 
   /*
    * Campo responsavel por identificar se o status é: A Fazer, Em Progresso, Paralizado, Terminado.
    */
-  @Column({ nullable: false })
+  @Column()
   tipo: number
 }

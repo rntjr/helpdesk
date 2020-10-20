@@ -13,13 +13,13 @@ export class ColunaQuadro {
   @PrimaryGeneratedColumn()
   id: number
 
-  @ManyToOne((type) => Quadros, (quadros) => quadros.id, { nullable: false })
+  @ManyToOne((type) => Quadros, (quadros) => quadros.id)
   quadros: Quadros
 
-  @Column({ nullable: false })
+  @Column()
   nome: string
 
-  @Column()
+  @Column({ nullable: true })
   descricao: string
 
   @OneToMany((type) => Cartao, (cartoes) => cartoes.colunaQuadro)

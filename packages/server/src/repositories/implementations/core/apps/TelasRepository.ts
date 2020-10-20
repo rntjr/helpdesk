@@ -1,6 +1,6 @@
 import { ICRUDRepository } from '../../../ICRUDRepository'
 
-export class TelasRepository implements ICRUDRepository {
+export class TelasRepositoryImpl implements ICRUDRepository {
   create(): void {
     return null
   }

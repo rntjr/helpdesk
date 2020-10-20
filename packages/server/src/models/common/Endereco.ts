@@ -8,15 +8,15 @@ export class Endereco {
   @Column({ unique: true })
   cep: string
 
-  @Column({ nullable: false })
+  @Column()
   rua: string
 
-  @Column({ nullable: false })
+  @Column()
   bairro: string
 
-  @Column({ nullable: false })
+  @Column()
   cidade: string
 
-  @Column({ nullable: false })
+  @Column()
   estado: string
 }
