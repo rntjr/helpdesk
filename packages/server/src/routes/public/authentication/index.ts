@@ -1,7 +1,6 @@
 import { Router, Request, Response } from 'express'
 import { AuthenticationController } from '../../../controllers/core/authentication/AuthenticationController'
 import { UsuariosRepositoryImpl } from '../../../repositories/implementations/core/authentication/UsuariosRepositoryImpl'
-import { AuthenticationService } from '../../../services/core/authentication/AuthenticationService'
 import { TokenService } from '../../../services/core/authentication/TokenService'
 import { ValidatePasswordService } from '../../../services/core/authentication/ValidatePasswordService'
 
@@ -9,12 +8,9 @@ const router = Router()
 
 router.post('/', async (request: Request, response: Response) => {
   const authController = new AuthenticationController(
-    new AuthenticationService(
-      response,
-      new UsuariosRepositoryImpl(),
-      new TokenService()
-    ),
-    new ValidatePasswordService(new UsuariosRepositoryImpl())
+    new UsuariosRepositoryImpl(),
+    new ValidatePasswordService(new UsuariosRepositoryImpl()),
+    new TokenService()
   )
   return await authController.execute(request, response)
 })

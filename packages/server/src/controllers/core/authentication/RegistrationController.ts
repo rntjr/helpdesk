@@ -1,12 +1,12 @@
 import { Request, Response } from 'express'
 import { RegistrarDTO } from '../../../dto/core/authentication/RegistrarDTO'
 import { IUsuariosRepository } from '../../../repositories/core/authentication/IUsuariosRepository'
-import { IAuthenticationService } from '../../../services/core/authentication/AuthenticationService'
+import { ITokenService } from '../../../services/core/authentication/TokenService'
 
 export class RegistrationController {
   constructor(
     private usuarioRepository: IUsuariosRepository,
-    private auth: IAuthenticationService
+    private tokenService: ITokenService
   ) {}
 
   async execute(request: Request, response: Response): Promise<Response> {
@@ -21,7 +21,7 @@ export class RegistrationController {
       return response.status(403).send({ message: 'E-mail já cadastrado!' })
     }
     const usuario = await this.usuarioRepository.create(registrar)
-    console.log(usuario)
-    return await this.auth.execute(usuario)
+    const token = await this.tokenService.createToken({ usuario: usuario })
+    return response.status(200).send({ token })
   }
 }
