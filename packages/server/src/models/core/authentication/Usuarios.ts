@@ -10,12 +10,12 @@ import { UsuariosGrupoPermissao } from './UsuariosGrupoPermissao'
 import bcrypt from 'bcrypt'
 
 export interface IUsuarios {
-  id: number
-  tipo: number
-  email: string
-  nome: string
-  usuario: string
-  senha: string
+  id?: number
+  tipo?: number
+  email?: string
+  nome?: string
+  usuario?: string
+  senha?: string
 }
 
 @Entity({ name: 'Usuarios', schema: 'Core' })

@@ -1,6 +1,14 @@
 import jwt from 'jsonwebtoken'
-import { IPayloadToken } from './IPayloadToken'
 import { environment as env } from '../../../../../../environment'
+import { IUsuarios } from '../../../models/core/authentication/Usuarios'
+import { AcessoGrupoPermissao } from '../../../models/core/authentication/AcessoGrupoPermissao'
+
+export interface IPayloadToken {
+  usuario?: IUsuarios
+  permissao?: AcessoGrupoPermissao
+  iat?: number
+  exp?: number
+}
 
 export interface ITokenService {
   createToken(payload: IPayloadToken): Promise<string>

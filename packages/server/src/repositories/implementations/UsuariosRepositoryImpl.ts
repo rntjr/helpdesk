@@ -1,6 +1,6 @@
 import { getRepository, DeleteResult, UpdateResult } from 'typeorm'
-import { Usuarios } from '../../../../models/core/authentication/Usuarios'
-import { IUsuariosRepository } from '../../../core/authentication/IUsuariosRepository'
+import { Usuarios } from '../../models/core/authentication/Usuarios'
+import { IUsuariosRepository } from '../core/authentication/IUsuariosRepository'
 
 export class UsuariosRepositoryImpl implements IUsuariosRepository {
   async findByEmail(email: string): Promise<Usuarios> {
@@ -32,7 +32,8 @@ export class UsuariosRepositoryImpl implements IUsuariosRepository {
     if (!(await repo.findOne({ where: { id } }))) {
       return null
     }
-    return await repo.update(id, data)
+    const usuario = repo.create(data)
+    return await repo.update(id, usuario)
   }
 
   async delete(id: number): Promise<DeleteResult> {
