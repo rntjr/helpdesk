@@ -5,13 +5,13 @@ module.exports = {
   },
   overrides: [
     {
-      files: ['**/Migrations/*.ts'],
+      files: ['./src/database/migrations/*.ts'],
       rules: {
         quotes: [2, 'backtick', { avoidEscape: true }]
       }
     },
     {
-      files:['**/Models/*.ts'],
+      files:['./src/models/**/*.ts'],
       rules:{
         '@typescript-eslint/no-unused-vars': 0
       }

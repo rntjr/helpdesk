@@ -1,8 +1,8 @@
 import 'reflect-metadata'
-import './Database/connect'
+import './database/connect'
 import express from 'express'
 import { environment as env } from '../../../environment'
-import router from './Routes'
+import router from './routes'
 
 const app = express()
 
