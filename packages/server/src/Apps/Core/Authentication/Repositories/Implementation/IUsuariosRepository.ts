@@ -8,10 +8,13 @@ class IUsuariosRepository implements ICRUDRepository {
     return await repo.findOne({ where: { usuario } })
   }
 
-  async create<Usuarios>(data: Usuarios): Promise<Usuarios> {
-    console.log(`data: ${data}`)
+  public async create(data: Usuarios): Promise<Usuarios> {
     const repo = getRepository(Usuarios)
-    return await repo.save(data, { data })
+    const usuario = data.usuario
+    if (!(await repo.findOne({ where: { usuario } }))) {
+      return null
+    }
+    return await repo.save(data)
   }
 
   async update<Usuarios>(id: number, data: Usuarios): Promise<UpdateResult> {

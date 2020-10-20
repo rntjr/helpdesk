@@ -1,4 +1,4 @@
-import { Request, Response, ErrorRequestHandler } from 'express'
+import { Request, Response } from 'express'
 import { AcessarDTO } from '../DTO/AcessarDTO'
 import { AuthenticationService } from '../Services/AuthenticationService'
 import validatePassword from '../Services/ValidatePasswordService'
@@ -6,7 +6,7 @@ import validatePassword from '../Services/ValidatePasswordService'
 class AuthenticationController {
   async execute(request: Request, response: Response): Promise<Response> {
     const acessar: AcessarDTO = request.body
-    if (!acessar) {
+    if (!acessar.usuario || !acessar.senha) {
       return response.status(403).send({ message: 'Sem dados na requisição!' })
     }
     if (!validatePassword.execute(acessar)) {

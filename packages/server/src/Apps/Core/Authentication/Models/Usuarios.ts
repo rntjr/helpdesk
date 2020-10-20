@@ -38,3 +38,5 @@ export class Usuarios {
     this.senha = bcrypt.hashSync(this.senha, 10)
   }
 }
+
+export type UsuariosInterface = Usuarios
