@@ -5,7 +5,7 @@ module.exports = {
   },
   overrides: [
     {
-      files: ['./src/database/migrations/*.ts'],
+      files: ['./src/migrations/*.ts'],
       rules: {
         quotes: [2, 'backtick', { avoidEscape: true }]
       }

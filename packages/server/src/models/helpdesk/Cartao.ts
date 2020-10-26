@@ -1,0 +1,24 @@
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm'
+import { ColunaQuadro } from './ColunaQuadro'
+import { Tarefas } from './Tarefas'
+
+@Entity({ schema: 'HelpDesk', name: 'Cartao' })
+export class Cartao {
+  @PrimaryGeneratedColumn()
+  id: number
+
+  @ManyToOne((type) => ColunaQuadro, (colunaQuadro) => colunaQuadro.id)
+  colunaQuadro: ColunaQuadro
+
+  @ManyToOne((type) => Tarefas, (tarefas) => tarefas.id)
+  tarefas: Tarefas
+
+  @Column()
+  sequencia: number
+
+  @Column()
+  titulo: string
+
+  @Column({ nullable: true })
+  descricao: string
+}

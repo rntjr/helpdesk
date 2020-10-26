@@ -5,6 +5,6 @@ import registrationRoute from './registration'
 const router = Router()
 
 router.use('/auth', authenticationRoute)
-router.use('/register', registrationRoute)
+router.use('/registration', registrationRoute)
 
 export default router
