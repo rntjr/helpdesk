@@ -5,7 +5,7 @@ export interface IDeleteUsuarioController {
   execute(request: Request, response: Response): Promise<Response>
 }
 
-export class IDeleteUsuarioController implements IDeleteUsuarioController {
+export class DeleteUsuarioController implements IDeleteUsuarioController {
   constructor(private deleteUsuario: IDeleteUsuarioService) {}
 
   async execute(request: Request, response: Response): Promise<Response> {

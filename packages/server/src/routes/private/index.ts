@@ -2,9 +2,18 @@ import express from 'express'
 import helpdeskRoutes from './helpdesk'
 import administrationRoutes from './administration'
 
-const app = express.Router()
+class PrivateRouter {
+  public routes: express.Router
 
-app.use('/administration', administrationRoutes)
-app.use('/helpdesk', helpdeskRoutes)
+  constructor() {
+    this.routes = express.Router()
+    this.privateRoutes()
+  }
 
-export default app
+  private privateRoutes(): void {
+    this.routes.use('/administration', administrationRoutes)
+    this.routes.use('/helpdesk', helpdeskRoutes)
+  }
+}
+
+export default new PrivateRouter().routes

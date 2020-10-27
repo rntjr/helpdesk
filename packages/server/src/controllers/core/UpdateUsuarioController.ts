@@ -1,4 +1,6 @@
 import { Request, Response } from 'express'
+import { BadRequestException } from '../../exceptions/BadRequestException'
+import { HttpException } from '../../exceptions/HttpException'
 import { IUsuarios } from '../../models/core/Usuarios'
 import { IUpdateUsuarioService } from '../../services/core/UpdateUsuarioService'
 
@@ -6,16 +8,21 @@ export interface IUpdateUsuarioController {
   execute(request: Request, response: Response): Promise<Response>
 }
 
-export class IUpdateUsuarioController implements IUpdateUsuarioController {
+export class UpdateUsuarioController implements IUpdateUsuarioController {
   constructor(private updateUsuario: IUpdateUsuarioService) {}
 
   async execute(request: Request, response: Response): Promise<Response> {
-    const id = request.params.id
-    let usuario: IUsuarios = request.body
-    if (!usuario) {
-      return response.status(401).send({ message: 'Sem dados na requisição!' })
+    const id = Number(request.params.id)
+    try {
+      let usuario: IUsuarios = request.body
+      if (!usuario) {
+        throw new BadRequestException('Sem dados na requisição!')
+      }
+      usuario = await this.updateUsuario.execute(id, usuario)
+      return response.status(200).send({ usuario })
+    } catch (error) {
+      const err: HttpException = error
+      return response.status(err.status || 500).send(err.message)
     }
-    usuario = await this.updateUsuario.execute(Number(id), usuario)
-    return response.status(200).send({ usuario })
   }
 }

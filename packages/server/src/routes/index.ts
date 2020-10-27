@@ -3,13 +3,30 @@ import publicRoute from './public'
 import privateRoute from './private'
 import { HttpException } from '../exceptions/HttpException'
 
-const app = express.Router()
+class MainRouter {
+  public routes: express.Router
 
-app.get('/hello', async (request: Request, response: Response) => {
-  const error = new HttpException(404, 'Not Found')
-  return response.status(error.status).send({ error: error.message })
-})
-app.use('/public', publicRoute)
-app.use('/private', privateRoute)
+  constructor() {
+    this.routes = express.Router()
+    this.publicRouter()
+    this.privateRouter()
+    this.testRoutes()
+  }
 
-export default app
+  private publicRouter(): void {
+    this.routes.use('/public', publicRoute)
+  }
+
+  private privateRouter(): void {
+    this.routes.use('/private', privateRoute)
+  }
+
+  private testRoutes(): void {
+    this.routes.get('/hello', async (request: Request, response: Response) => {
+      const error = new HttpException(404, 'Not Found')
+      return response.status(error.status).send({ error: error.message })
+    })
+  }
+}
+
+export default new MainRouter().routes

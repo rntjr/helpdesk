@@ -1,5 +1,5 @@
 import { MigrationInterface, QueryRunner } from 'typeorm'
-import { environment as env } from '../../../../../environment'
+import { environment as env } from '../../../../environment'
 
 export class FirstSchemas1602875595710 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {

@@ -33,7 +33,7 @@ export class AuthenticationController {
       return response.status(200).send({ token })
     } catch (error) {
       const err: HttpException = error
-      return response.status(err.status || 500).send({ err: err.message })
+      return response.status(err.status || 500).send(err.message)
     }
   }
 }

@@ -36,8 +36,8 @@ export class App {
     this.express.use(router)
   }
 
-  private database(): void {
-    createConnection(ormconfig)
+  private async database(): Promise<void> {
+    await createConnection(ormconfig)
       .then(() => console.log('Successfully connect with database'))
       .catch((err) => console.log({ message: err }))
   }

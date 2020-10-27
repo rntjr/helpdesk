@@ -1,24 +1,27 @@
 import { Request, Response } from 'express'
+import { BadRequestException } from '../../exceptions/BadRequestException'
+import { HttpException } from '../../exceptions/HttpException'
 import { IUsuarios } from '../../models/core/Usuarios'
-import { IUsuariosRepository } from '../../repositories/core/UsuariosRepository'
 import { ICreateUsuarioService } from '../../services/core/CreateUsuarioService'
 
 export interface ICreateUsuarioController {
   execute(request: Request, response: Response): Promise<Response>
 }
 
-export class ICreateUsuarioController implements ICreateUsuarioController {
-  constructor(
-    private createUsuario: ICreateUsuarioService,
-    private usuarioRepo: IUsuariosRepository
-  ) {}
+export class CreateUsuarioController implements ICreateUsuarioController {
+  constructor(private createUsuario: ICreateUsuarioService) {}
 
   async execute(request: Request, response: Response): Promise<Response> {
     let usuario: IUsuarios = request.body
-    if (!usuario.usuario || !usuario.senha) {
-      return response.status(401).send({ message: 'Sem dados na requisição!' })
+    try {
+      if (!usuario.usuario || !usuario.email || !usuario.senha) {
+        throw new BadRequestException('Sem dados na requisição!')
+      }
+      usuario = await this.createUsuario.execute(usuario)
+      return response.status(200).send({ usuario })
+    } catch (error) {
+      const err: HttpException = error
+      return response.status(err.status || 500).send(err.message)
     }
-    usuario = await this.createUsuario.execute(usuario)
-    return response.status(200).send({ usuario })
   }
 }

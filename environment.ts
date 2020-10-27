@@ -15,7 +15,6 @@ export interface Environment {
         migration: string,
         root: string
       },
-      type: string,
       host: string,
       port: number,
       username: string,
@@ -38,7 +37,6 @@ export const environment: Environment = {
         migration: process.env.SERVER_DATABASE_USERS_MIGRATION || 'postgres',
         root: process.env.SERVER_DATABASE_USERS_ROOT || 'postgres'
       },
-      type: process.env.SERVER_DATABASE_TYPE || 'postgres',
       host: process.env.SERVER_DATABASE_HOST || 'localhost',
       port: Number(process.env.SERVER_DATABASE_PORT) || 5432,
       database: process.env.SERVER_DATABASE_NAME || 'postgres',

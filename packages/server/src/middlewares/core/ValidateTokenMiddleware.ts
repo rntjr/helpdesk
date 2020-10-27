@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express'
-import { ITokenService } from '../../services/core/TokenService'
+import { IIsValidateTokenService } from '../../services/core/IsValidateTokenService'
 
-export interface IValidateTokenMiddleware {
+export interface IIsValidateTokenMiddleware {
   execute(
     request: Request,
     response: Response,
@@ -9,8 +9,8 @@ export interface IValidateTokenMiddleware {
   ): Promise<Response>
 }
 
-export class ValidateTokenMiddleware {
-  constructor(private tokenService: ITokenService) {}
+export class IsValidateTokenMiddleware implements IIsValidateTokenMiddleware {
+  constructor(private isValidateToken: IIsValidateTokenService) {}
 
   async execute(
     request: Request,
@@ -21,9 +21,7 @@ export class ValidateTokenMiddleware {
     if (!token) {
       return response.status(401).send({ message: 'Token não enviado' })
     }
-    if (!(await this.tokenService.validateToken(token))) {
-      return response.status(401).send({ message: 'Token inválido!' })
-    }
+    await this.isValidateToken.execute(token)
     next()
   }
 }

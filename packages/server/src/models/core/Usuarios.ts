@@ -17,8 +17,8 @@ export interface IUsuarios {
   tipo?: number
   email?: string
   nome?: string
-  usuario: string
-  senha: string
+  usuario?: string
+  senha?: string
   usuarioPerfisAcesso?: IUsuariosPerfisAcesso[]
 }
 
