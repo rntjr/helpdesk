@@ -16,7 +16,9 @@ export class FindUsuarioByIdController {
       return response.status(200).send(usuario)
     } catch (error) {
       const err: HttpException = error
-      return response.status(err.status || 500).json(err.message)
+      return response
+        .status(err.status || 500)
+        .send({ error: { message: err.message } })
     }
   }
 }

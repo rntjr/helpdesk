@@ -3,8 +3,9 @@ import { IUsuarios, Usuarios } from './Usuarios'
 import { IPerfisAcesso, PerfisAcesso } from './PerfisAcesso'
 
 export interface IUsuariosPerfisAcesso {
-  usuario: IUsuarios
-  perfil: IPerfisAcesso
+  id?: number
+  usuario?: IUsuarios
+  perfil?: IPerfisAcesso
 }
 
 @Entity({ name: 'UsuariosPerfisAcesso', schema: 'Core' })

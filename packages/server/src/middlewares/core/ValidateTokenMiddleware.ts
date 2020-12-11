@@ -1,4 +1,6 @@
 import { NextFunction, Request, Response } from 'express'
+import { BadRequestException } from '../../exceptions/BadRequestException'
+import { HttpException } from '../../exceptions/HttpException'
 import { IIsValidateTokenService } from '../../services/core/IsValidateTokenService'
 
 export interface IIsValidateTokenMiddleware {
@@ -17,11 +19,18 @@ export class IsValidateTokenMiddleware implements IIsValidateTokenMiddleware {
     response: Response,
     next: NextFunction
   ): Promise<Response> {
-    const token = request.headers.authorization.split(' ')[1]
-    if (!token) {
-      return response.status(401).send({ message: 'Token não enviado' })
+    try {
+      const token = request.headers.authorization.split(' ')[1]
+      if (!token) {
+        throw new BadRequestException('Token não enviado!')
+      }
+      await this.isValidateToken.execute(token)
+      next()
+    } catch (error) {
+      const err: HttpException = error
+      return response
+        .status(err.status || 500)
+        .send({ error: { message: err.message } })
     }
-    await this.isValidateToken.execute(token)
-    next()
   }
 }

@@ -3,7 +3,7 @@ import { IUsuarios, Usuarios } from '../../models/core/Usuarios'
 import { ICRUDRepository } from '../ICRUDRepository'
 
 export interface IUsuariosRepository extends ICRUDRepository {
-  find(usuario: IUsuarios): Promise<IUsuarios[]>
+  find(data: IUsuarios): Promise<IUsuarios[]>
   findById(id: number): Promise<IUsuarios>
   findByUsuario(usuario: string): Promise<IUsuarios>
   findByEmail(email: string): Promise<IUsuarios>
@@ -28,9 +28,9 @@ export class UsuariosRepository implements IUsuariosRepository {
     return await repo.findOne({ where: { usuario } })
   }
 
-  async find(usuario: Usuarios): Promise<Usuarios[]> {
+  async find(data: Usuarios): Promise<Usuarios[]> {
     const repo = getRepository(Usuarios)
-    return await repo.find(usuario)
+    return await repo.find(data)
   }
 
   async create(data: Usuarios): Promise<Usuarios> {

@@ -6,15 +6,9 @@ import router from './routes'
 import { createConnection } from 'typeorm'
 import ormconfig from '../ormconfig.js'
 
-export interface IApp {
-  express: express.Application
-  middlewares(): void
-  routes(): void
-  database(): void
-}
-
 export class App {
   public express: express.Application
+
   constructor() {
     this.express = express()
     this.middlewares()

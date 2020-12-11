@@ -19,10 +19,12 @@ export class UpdateUsuarioController implements IUpdateUsuarioController {
         throw new BadRequestException('Sem dados na requisição!')
       }
       usuario = await this.updateUsuario.execute(id, usuario)
-      return response.status(200).send({ usuario })
+      return response.status(200).send({ data: { usuario } })
     } catch (error) {
       const err: HttpException = error
-      return response.status(err.status || 500).send(err.message)
+      return response
+        .status(err.status || 500)
+        .send({ error: { message: err.message } })
     }
   }
 }

@@ -4,7 +4,7 @@ import path from 'path'
 // Environment config
 dotenv.config({ path: path.join(__dirname, '.env') })
 
-export interface Environment {
+interface Environment {
   server: {
     token: {
       secret: string

@@ -1,8 +1,5 @@
 module.exports = {
-  rules: {
-    'prettier/prettier': 2,
-    'no-useless-constructor': 0
-  },
+  extends:['prettier'],
   overrides: [
     {
       files: ['./src/migrations/*.ts'],
@@ -15,6 +12,13 @@ module.exports = {
       rules:{
         '@typescript-eslint/no-unused-vars': 0
       }
-    }
+    },
+    {
+      files: ['./src/**/*.ts'],
+      rules: {
+        'prettier/prettier': 2,
+        'no-useless-constructor': 0
+      }
+    },
   ]
 }

@@ -18,10 +18,12 @@ export class CreateUsuarioController implements ICreateUsuarioController {
         throw new BadRequestException('Sem dados na requisição!')
       }
       usuario = await this.createUsuario.execute(usuario)
-      return response.status(200).send({ usuario })
+      return response.status(200).send({ data: { usuario } })
     } catch (error) {
       const err: HttpException = error
-      return response.status(err.status || 500).send(err.message)
+      return response
+        .status(err.status || 500)
+        .send({ error: { message: err.message } })
     }
   }
 }

@@ -30,10 +30,12 @@ export class AuthenticationController {
       }
       delete usuario.senha
       const token = await this.createToken.execute({ usuario: usuario })
-      return response.status(200).send({ token })
+      return response.status(200).send({ data: { token } })
     } catch (error) {
       const err: HttpException = error
-      return response.status(err.status || 500).send(err.message)
+      return response
+        .status(err.status || 500)
+        .send({ error: { message: err.message } })
     }
   }
 }
